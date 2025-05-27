@@ -2,88 +2,195 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>تمرین طراحی وب</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تمرین طراحی وب - نسخه پیشرفته</title>
     <style>
-        body {
-            font-family: Tahoma;
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
-
-        form {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            border: 1px solid #ddd;
-        }
-
-        input, button {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
+        /* پایه‌ای */
+        * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Vazir', Tahoma, sans-serif;
+            background: #f5f7fa;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* کارت‌های مدرن */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+        /* فرم‌های زیبا */
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
         }
 
         button {
-            background: #007bff;
+            width: 100%;
+            padding: 0.8rem;
+            background: linear-gradient(135deg, #007bff, #0062cc);
             color: white;
             border: none;
+            border-radius: 8px;
+            font-size: 1rem;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: opacity 0.3s;
         }
 
         button:hover {
-            background: #0056b3;
+            opacity: 0.9;
         }
 
+        /* افکت‌های ماوس پیشرفته */
+        #hoverBtn {
+            position: relative;
+            overflow: hidden;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            background: #28a745;
+            transition: all 0.3s;
+        }
+
+        #hoverBtn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        #hoverBtn:hover::before {
+            left: 100%;
+        }
+
+        /* Tooltip مدرن */
         .tooltip {
             position: absolute;
-            background: #333;
+            background: rgba(0, 0, 0, 0.85);
             color: white;
-            padding: 8px 12px;
-            border-radius: 4px;
-            display: none;
-            font-size: 14px;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        /* لینک زیبا */
+        .data-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.8rem 1.5rem;
+            background: #17a2b8;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .data-link:hover {
+            background: #138496;
+        }
+
+        /* انیمیشن‌های ظریف */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animated {
+            animation: fadeIn 0.5s ease-out;
         }
     </style>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet">
 </head>
 <body>
-
     <!-- بخش 1: Local Storage -->
-    <form id="loginForm">
-        <h2>🔐 ورود کاربر</h2>
-        <input type="text" id="username" placeholder="نام کاربری" required>
-        <input type="password" id="password" placeholder="رمز عبور" required>
-        <button type="submit">ذخیره در Local Storage</button>
-    </form>
+    <div class="card animated">
+        <form id="loginForm">
+            <h2>🔒 ورود کاربر</h2>
+            <div class="form-group">
+                <input type="text" id="username" placeholder="نام کاربری" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" placeholder="رمز عبور" required>
+            </div>
+            <button type="submit">ذخیره در حافظه محلی</button>
+        </form>
+    </div>
 
     <!-- بخش 2: رویدادهای ماوس -->
-    <div>
-        <h2>🖱️ رویدادهای ماوس</h2>
+    <div class="card animated">
+        <h2>🖱️ تعاملات ماوس</h2>
         <button 
             id="hoverBtn"
-            data-tooltip="این یک Tooltip است!"
+            data-tooltip="این یک راهنمای پیشرفته است!"
             onmouseover="showTooltip(event)"
             onmouseout="hideTooltip()"
-            onclick="alert('کلیک موفق! ✅')"
+            onclick="showSuccessAlert()"
         >
+            هاور روی من (افکت ویژه)
         </button>
         <div id="tooltip" class="tooltip"></div>
     </div>
 
-    <!-- بخش 3: ارسال به Firebase -->
-    <form id="dataForm">
-        <h2>🔥 ارسال به Firebase</h2>
-        <input type="text" id="dataInput" placeholder="متن خود را وارد کنید" required>
-        <button type="submit">ذخیره در دیتابیس</button>
-    </form>
-    <p><a href="view-data.html">مشاهده داده‌ها →</a></p>
+    <!-- بخش 3: ارتباط با Firebase -->
+    <div class="card animated">
+        <form id="dataForm">
+            <h2>📡  Firebaseارسال به پایگاه داده</h2>
+            <div class="form-group">
+                <input type="text" id="dataInput" placeholder="متن خود را اینجا وارد کنید..." required>
+            </div>
+            <button type="submit">ذخیره در فضای ابری</button>
+        </form>
+        <a href="view-data.html" class="data-link animated">
+            📊 مشاهده داده‌های ذخیره شده
+        </a>
+    </div>
 
-    <!-- Firebase SDK -->
+    <!-- اسکریپت‌های Firebase -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
         import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
 
         const firebaseConfig = {
@@ -140,6 +247,30 @@
                 alert('خطا در ارسال داده!');
             });
         });
+    </script>
+
+    <script>
+        // نمایش پیام پیشرفته
+        function showSuccessAlert() {
+            const alertBox = document.createElement('div');
+            alertBox.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                padding: 1rem 2rem;
+                background: #28a745;
+                color: white;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                animation: fadeIn 0.3s ease-out;
+            `;
+            alertBox.textContent = 'عملیات با موفقیت انجام شد! ✅';
+            document.body.appendChild(alertBox);
+            
+            setTimeout(() => {
+                alertBox.remove();
+            }, 3000);
+        }
     </script>
 </body>
 </html>
