@@ -1,179 +1,145 @@
 <!DOCTYPE html>
-<html lang="fa-IR" dir="rtl">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>رزومه - پویا خرمی</title>
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet">
+    <title>تمرین طراحی وب</title>
     <style>
         body {
-            font-family: Vazir, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
-            margin: 0;
-            padding: 20px;
-            background-color: #f8f9fa;
-            color: #2c3e50;
-            direction: rtl;
-        }
-
-        .container {
+            font-family: Tahoma;
             max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 20px auto;
+            padding: 0 20px;
         }
 
-        .header {
-            text-align: center;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 25px;
-            margin-bottom: 30px;
-        }
-
-        .header h1 {
-            color: #2c3e50;
-            margin: 10px 0;
-            font-size: 2.5em;
-        }
-
-        .header h2 {
-            color: #7f8c8d;
-            font-weight: normal;
-        }
-
-        .section {
-            margin-bottom: 30px;
-            padding: 20px;
+        form {
             background: #f8f9fa;
-            border-radius: 10px;
-            border-right: 3px solid #3498db;
-        }
-
-        .section h3 {
-            color: #3498db;
-            margin: 0 0 15px 0;
-            font-size: 1.4em;
-        }
-
-        ul {
-            padding-right: 25px;
-            margin: 10px 0;
-        }
-
-        ul.contact-info {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0;
-        }
-
-        ul.contact-info li {
-            margin: 10px 0;
-            font-size: 1.1em;
-        }
-
-        ul.skills {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: flex-end;
-        }
-
-        ul.skills li {
-            background: #3498db;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9em;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 40px;
             padding: 20px;
-            color: #7f8c8d;
-            border-top: 1px solid #eee;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .tooltip {
+            position: absolute;
+            background: #333;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            display: none;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>پویا خرمی</h1>
-            <h2>دانشجوی کارشناسی مهندسی کامپیوتر</h2>
-            <ul class="contact-info">
-                <li>📧 ایمیل: pooyakhorami@gmail.com</li>
-                <li>🏠 آدرس: کرمانشاه، بلوار دانشگاه</li>
-                <li>🌐 گیت‌هاب: github.com/pouya2573</li>
-            </ul>
-        </div>
 
-        <div class="section">
-            <h3>معرفی</h3>
-            <p>
-                دانشجوی  مهندسی کامپیوتر دانشگاه رازی با تمرکز بر حوزه‌های توسعه نرم‌افزار و هوش مصنوعی.
-                دارای تجربه عملی در اجرای پروژه‌های مرتبط با یادگیری ماشین و توسعه اپلیکیشن‌های وب. علاقه‌مند به
-                مشارکت در پروژه‌های نوآورانه و حل چالش‌های فناوری اطلاعات.
-            </p>
-        </div>
+    <!-- بخش 1: Local Storage -->
+    <form id="loginForm">
+        <h2>🔐 ورود کاربر</h2>
+        <input type="text" id="username" placeholder="نام کاربری" required>
+        <input type="password" id="password" placeholder="رمز عبور" required>
+        <button type="submit">ذخیره در Local Storage</button>
+    </form>
 
-        <div class="section">
-            <h3>سوابق تحصیلی</h3>
-            <p>
-                <strong>دانشگاه رازی کرمانشاه</strong><br>
-                رشته: مهندسی کامپیوتر - گرایش نرم‌افزار<br>
-                مقطع: کارشناسی پیوسته <br>
-                
-            </p>
-        </div>
-
-        <div class="section">
-            <h3>تجربه‌های شغلی</h3>
-            <p><strong>توسعه دهنده فرانت‌اند - شرکت فناوران جوان (۱۴۰۲ تاکنون)</strong></p>
-            <ul>
-                <li>توسعه رابط کاربری پیشرفته با React.js</li>
-                <li>پیاده‌سازی کامپوننت‌های قابل استفاده مجدد</li>
-                <li>بهینه‌سازی عملکرد اپلیکیشن‌های وب</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h3>مهارت‌های فنی</h3>
-            <ul class="skills">
-                <li>Python</li>
-                <li>JavaScript (ES6+)</li>
-                <li>React.js</li>
-                <li>Django</li>
-                <li>Git</li>
-                <li>SQL</li>
-                <li>Docker</li>
-                <li>Linux</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h3>پروژه‌های برجسته</h3>
-            <p><strong>سیستم مدیریت هوشمند کتابخانه</strong></p>
-            <ul>
-                <li>توسعه بک‌اند با Django</li>
-                <li>پیاده‌سازی فرانت‌اند با React</li>
-                <li>استفاده از الگوریتم‌های پیشنهاد دهنده کتاب</li>
-            </ul>
-
-            <p><strong>اپلیکیشن پیش‌بینی بورس</strong></p>
-            <ul>
-                <li>پیاده‌سازی مدل LSTM برای پیش‌بینی سهام</li>
-                <li>توسعه داشبورد تحلیلی</li>
-                <li>یکپارچه‌سازی با APIهای مالی</li>
-            </ul>
-        </div>
+    <!-- بخش 2: رویدادهای ماوس -->
+    <div>
+        <h2>🖱️ رویدادهای ماوس</h2>
+        <button 
+            id="hoverBtn"
+            data-tooltip="این یک Tooltip است!"
+            onmouseover="showTooltip(event)"
+            onmouseout="hideTooltip()"
+            onclick="alert('کلیک موفق! ✅')"
+        >
+        </button>
+        <div id="tooltip" class="tooltip"></div>
     </div>
 
-    <footer>
-     توجه: اطلاعات درج شده در این صفحه صحیح نمیباشد
-    </footer>
+    <!-- بخش 3: ارسال به Firebase -->
+    <form id="dataForm">
+        <h2>🔥 ارسال به Firebase</h2>
+        <input type="text" id="dataInput" placeholder="متن خود را وارد کنید" required>
+        <button type="submit">ذخیره در دیتابیس</button>
+    </form>
+    <p><a href="view-data.html">مشاهده داده‌ها →</a></p>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+        import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAtSmyhq745ReVsRxeUYpUN6YcYkborWvU",
+            authDomain: "webpriject-9c06e.firebaseapp.com",
+            databaseURL: "https://webpriject-9c06e-default-rtdb.firebaseio.com",
+            projectId: "webpriject-9c06e",
+            storageBucket: "webpriject-9c06e.firebasestorage.app",
+            messagingSenderId: "1047086831270",
+            appId: "1:1047086831270:web:44ffa75399085739830667",
+            measurementId: "G-MELELG0X5F"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // ======== Local Storage ========
+        document.getElementById('loginForm').addEventListener('submit', e => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            localStorage.setItem('webUser', username);
+            alert('اطلاعات در Local Storage ذخیره شد!');
+        });
+
+        // ======== Tooltip ========
+        function showTooltip(e) {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.style.display = 'block';
+            tooltip.style.top = `${e.clientY + 15}px`;
+            tooltip.style.left = `${e.clientX + 15}px`;
+            tooltip.textContent = e.target.dataset.tooltip;
+        }
+
+        function hideTooltip() {
+            document.getElementById('tooltip').style.display = 'none';
+        }
+
+        // ======== Firebase Submit ========
+        document.getElementById('dataForm').addEventListener('submit', e => {
+            e.preventDefault();
+            const data = document.getElementById('dataInput').value;
+            
+            push(ref(db, 'posts'), {
+                text: data,
+                timestamp: new Date().toISOString()
+            })
+            .then(() => {
+                alert('داده با موفقیت ذخیره شد!');
+                document.getElementById('dataInput').value = '';
+            })
+            .catch(error => {
+                console.error('خطا:', error);
+                alert('خطا در ارسال داده!');
+            });
+        });
+    </script>
 </body>
 </html>
