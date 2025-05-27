@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>نمایش داده‌ها</title>
+    <style>
+        body {
+            font-family: Tahoma;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .entry {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border: 1px solid #eee;
+        }
+        small {
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h1>📂 داده‌های ذخیره شده</h1>
+    <div id="entries"></div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+
+        const firebaseConfig = { /* همانند index.html */ };
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // دریافت داده‌ها
+        const entriesRef = ref(db, 'posts');
+        
+        onValue(entriesRef, (snapshot) => {
+            const data = snapshot.val();
+            const entriesDiv = document.getElementById('entries');
+            entriesDiv.innerHTML = '';
+
+            for (const key in data) {
+                entriesDiv.innerHTML += `
+                    <div class="entry">
+                        ${data[key].text}
+                        <small>${new Date(data[key].timestamp).toLocaleString('fa-IR')}</small>
+                    </div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
