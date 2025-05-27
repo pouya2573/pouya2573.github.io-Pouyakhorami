@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>پروزه وب</title>
+    <title>سایت لاگین پیشرفته</title>
     <style>
-
         * {
             box-sizing: border-box;
             margin: 0;
@@ -21,7 +20,6 @@
             align-items: center;
         }
 
-  
         .login-card {
             background: white;
             width: 400px;
@@ -35,7 +33,6 @@
             transform: translateY(-5px);
         }
 
-   
         h1 {
             color: #2c3e50;
             text-align: center;
@@ -43,7 +40,6 @@
             font-size: 1.8rem;
         }
 
-     
         .input-group {
             margin-bottom: 1.5rem;
             position: relative;
@@ -64,7 +60,6 @@
             box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
         }
 
-  
         .login-btn {
             width: 100%;
             padding: 0.8rem;
@@ -84,7 +79,6 @@
             transform: scale(1.02);
         }
 
-  
         .login-btn::before {
             content: '';
             position: absolute;
@@ -92,19 +86,13 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(
-                120deg,
-                transparent,
-                rgba(255, 255, 255, 0.3),
-                transparent
-            );
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             transition: 0.5s;
         }
 
         .login-btn:hover::before {
             left: 100%;
         }
-
 
         .tooltip {
             position: absolute;
@@ -127,7 +115,6 @@
             visibility: visible;
         }
 
-   
         .data-section {
             display: none;
             margin-top: 2rem;
@@ -148,9 +135,44 @@
             animation: fadeIn 0.5s;
         }
 
+        .alert {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            animation: slideIn 0.3s ease-out, fadeOut 0.3s ease-in 2.7s forwards;
+        }
+
+        .alert-success {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            border-left: 5px solid #27ae60;
+        }
+
+        .alert-error {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            border-left: 5px solid #c0392b;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
         }
     </style>
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet">
@@ -160,7 +182,6 @@
     <div class="login-card">
         <h1>ورود به سیستم</h1>
         
-        <!-- فرم لاگین -->
         <form id="loginForm">
             <div class="input-group">
                 <input type="text" id="username" placeholder="نام کاربری" required>
@@ -175,7 +196,6 @@
             </button>
         </form>
 
-        <!-- بخش داده‌های Firebase (پس از لاگین نمایش داده می‌شود) -->
         <div class="data-section">
             <h2>ارسال داده جدید</h2>
             <form id="dataForm">
@@ -190,7 +210,6 @@
         </div>
     </div>
 
-    <!-- Firebase SDK -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
         import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
@@ -206,35 +225,59 @@
             measurementId: "G-MELELG0X5F"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // ======== Local Storage ========
+        function showAlert(message, type) {
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.innerHTML = `
+                <span class="alert-icon">${type === 'success' ? '✓' : '⚠'}</span>
+                ${message}
+            `;
+            document.body.appendChild(alert);
+            setTimeout(() => alert.remove(), 3000);
+        }
+
         document.getElementById('loginForm').addEventListener('submit', e => {
             e.preventDefault();
             const username = document.getElementById('username').value;
-            localStorage.setItem('currentUser', username);
-            document.querySelector('.data-section').style.display = 'block';
-            e.target.style.display = 'none';
+            
+            if(username.length < 3) {
+                showAlert('نام کاربری باید حداقل ۳ کاراکتر داشته باشد!', 'error');
+                return;
+            }
+            
+            try {
+                localStorage.setItem('currentUser', username);
+                document.querySelector('.data-section').style.display = 'block';
+                e.target.style.display = 'none';
+                showAlert('با موفقیت وارد شدید!', 'success');
+            } catch(error) {
+                showAlert('خطا در ذخیره اطلاعات!', 'error');
+            }
         });
 
-        // ======== Firebase ========
         document.getElementById('dataForm').addEventListener('submit', e => {
             e.preventDefault();
             const data = document.getElementById('dataInput').value;
             
+            if(data.trim() === '') {
+                showAlert('لطفا متن مورد نظر را وارد کنید!', 'error');
+                return;
+            }
+
             push(ref(db, 'posts'), {
                 text: data,
                 timestamp: new Date().toISOString()
             }).then(() => {
+                showAlert('داده با موفقیت ذخیره شد!', 'success');
                 document.getElementById('dataInput').value = '';
             }).catch(error => {
-                console.error('خطا:', error);
+                showAlert('خطا در ارسال داده!', 'error');
             });
         });
 
-        // نمایش Real-Time داده‌ها
         onValue(ref(db, 'posts'), (snapshot) => {
             const data = snapshot.val();
             const dataList = document.getElementById('dataList');
