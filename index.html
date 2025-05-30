@@ -130,7 +130,6 @@
     </form>
   </div>
 
-  <!-- لینک‌ها همیشه قابل مشاهده -->
   <div class="links" id="mainLinks">
     <a href="#" id="showFirebaseData">مشاهده داده‌های دیتابیس</a>
     <a href="#" id="showLocalData">مشاهده داده‌های Local Storage</a>
@@ -176,7 +175,6 @@
     const localData = document.getElementById('localData');
     const localUser = document.getElementById('localUser');
 
-    // Tooltip hover
     usernameInput.addEventListener('mouseover', () => {
       tooltipHover.classList.add('show-tooltip');
     });
@@ -184,13 +182,11 @@
       tooltipHover.classList.remove('show-tooltip');
     });
 
-    // Tooltip click
     document.getElementById('loginBtn').addEventListener('click', () => {
       tooltipClick.classList.add('show-tooltip');
       setTimeout(() => tooltipClick.classList.remove('show-tooltip'), 2000);
     });
 
-    // Tooltip double click
     document.getElementById('saveBtn').addEventListener('dblclick', () => {
       alert('دکمه ذخیره دوبار کلیک شد!');
     });
